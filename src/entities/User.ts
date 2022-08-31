@@ -10,9 +10,10 @@ import {
 import BaseEntity from "./Entity";
 import bcrypt from "bcryptjs";
 import Post from "./Post";
+import Vote from "./Vote";
 
 @Entity("users")
-export class User extends BaseEntity {
+export default class User extends BaseEntity {
   @Index()
   @IsEmail(undefined, { message: "이메일 주소가 잘못되었습니다." })
   @Length(1, 255, { message: "이메일 주소를 비워둘 수 없습니다." })
