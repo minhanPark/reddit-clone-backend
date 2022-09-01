@@ -66,7 +66,23 @@ const login = async (req: Request, res: Response) => {
     }
 
     const token = jwt.sign({ username }, process.env.JWT_SECRET as string);
-    res.set("Set-Cookie", cookie.serialize("token", token));
+    res.set(
+      "Set-Cookie",
+      cookie.serialize("token", token, {
+        httpOnly: true,
+        maxAge: 60 * 60 * 24 * 7,
+        path: "/",
+      })
+    );
+    // httpOnly 옵션
+    // 이 옵션은 자바스크립트 같은 클라이언트 측 스크립트가 쿠키를 사용할 수 없게 합니다. document.cookie를 통해 쿠키를 볼 수도 없고 조작할 수도 없습니다.
+    // secure
+    // secure는 https 연결에서만 쿠키를 사용할 수 있게 합니다.
+    // samesite
+    // 요청이 외부사이트에서 일어날 때, 브라우저가 쿠키를 보내지 못하도록 막아줍니다. xsrf 공격을 막는데 유용합니다.
+    // expires/max-age
+    // 쿠키의 만료시간을 정해줍니다. 이 옵션이 없으면 브라우저가 닫힐 때 쿠키도 가팅 삭제됩니다.
+    return res.json({ user, token });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error });
