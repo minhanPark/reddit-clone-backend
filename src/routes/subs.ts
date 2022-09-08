@@ -17,6 +17,10 @@ const createSub = async (req: Request, res: Response, next: NextFunction) => {
     if (isEmpty(name)) errors.name = "이름을 입력해주세요.";
     if (isEmpty(title)) errors.title = "타이틀을 입력해주세요.";
 
+    if (Object.keys(errors).length > 0) {
+      return res.status(400).json(errors);
+    }
+
     const sub = await AppDataSource.getRepository(Sub)
       .createQueryBuilder("sub")
       .where("lower(sub.name) = :name", { name: name.toLowerCase() })

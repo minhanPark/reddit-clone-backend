@@ -9,7 +9,6 @@ const userMiddleware = async (
 ) => {
   try {
     const token = req.cookies.token;
-    console.log({ token });
     if (!token) return next();
 
     const { username }: any = jwt.verify(
@@ -22,6 +21,7 @@ const userMiddleware = async (
     if (!user) throw new Error("Unauthenticated");
 
     res.locals.user = user;
+    return next();
   } catch (error) {
     console.error(error);
     return res.status(400).json({ error: ":(" });
