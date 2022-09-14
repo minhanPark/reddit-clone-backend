@@ -3,6 +3,7 @@ import morgan from "morgan";
 import { AppDataSource } from "./data-source";
 import authRouter from "./routes/auth";
 import subsRouter from "./routes/subs";
+import postsRouter from "./routes/posts";
 import cors from "cors";
 import * as dotenv from "dotenv";
 import cookieParser from "cookie-parser";
@@ -25,6 +26,7 @@ app.use(cookieParser());
 app.get("/", (_, res) => res.send("runningwater"));
 app.use("/api/auth", authRouter);
 app.use("/api/subs", subsRouter);
+app.use("/api/posts", postsRouter);
 
 app.use(express.static("public"));
 
