@@ -29,6 +29,7 @@ app.use("/api/subs", subsRouter);
 const port = 4000;
 
 app.listen(port, async () => {
+  console.log("dev 환경");
   console.log(`Server running at http://localhost:${port}`);
 
   AppDataSource.initialize()
