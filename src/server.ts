@@ -26,10 +26,11 @@ app.get("/", (_, res) => res.send("runningwater"));
 app.use("/api/auth", authRouter);
 app.use("/api/subs", subsRouter);
 
+app.use(express.static("public"));
+
 const port = 4000;
 
 app.listen(port, async () => {
-  console.log("dev 환경");
   console.log(`Server running at http://localhost:${port}`);
 
   AppDataSource.initialize()
