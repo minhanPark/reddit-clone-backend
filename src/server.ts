@@ -7,6 +7,7 @@ import postsRouter from "./routes/posts";
 import cors from "cors";
 import * as dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import voteRouter from "./routes/votes";
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ app.get("/", (_, res) => res.send("runningwater"));
 app.use("/api/auth", authRouter);
 app.use("/api/subs", subsRouter);
 app.use("/api/posts", postsRouter);
+app.use("/api/votes", voteRouter);
 
 app.use(express.static("public"));
 
