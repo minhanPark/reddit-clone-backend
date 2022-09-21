@@ -8,6 +8,7 @@ import cors from "cors";
 import * as dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import voteRouter from "./routes/votes";
+import usersRouter from "./routes/users";
 
 dotenv.config();
 
@@ -29,6 +30,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/subs", subsRouter);
 app.use("/api/posts", postsRouter);
 app.use("/api/votes", voteRouter);
+app.use("/api/users", usersRouter);
 
 app.use(express.static("public"));
 
